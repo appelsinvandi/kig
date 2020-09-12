@@ -1,0 +1,35 @@
+{
+  "name": "kig",
+  "version": "1.0.0",
+  "source": "src/index.ts",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "files": [
+    "lib/"
+  ],
+  "bin": {
+    "kig": "./lib/bin/index.js"
+  },
+  "scripts": {
+    "start": "ts-node --project tsconfig.dev.json -r tsconfig-paths/register ./src/bin/index.ts",
+    "build": "tsc -p ./tsconfig.dev.json"
+  },
+  "dependencies": {
+    "arrify": "^2.0.1",
+    "chalk": "^4.1.0",
+    "change-case": "^4.1.1",
+    "cosmiconfig": "^7.0.0",
+    "ejs": "^3.1.5",
+    "enquirer": "^2.3.6",
+    "joi": "^17.2.1",
+    "js-yaml": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "3.0.4",
+    "@types/js-yaml": "3.12.5",
+    "@types/node": "12.12.54",
+    "ts-node": "9.0.0",
+    "tsconfig-paths": "3.9.0",
+    "typescript": "4.0.2"
+  }
+}

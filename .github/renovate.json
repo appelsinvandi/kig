@@ -1,0 +1,32 @@
+{
+  "timezone": "Europe/Copenhagen",
+  "extends": [
+    ":automergeBranch",
+    ":automergePatch",
+    ":dependencyDashboard",
+    ":disablePeerDependencies",
+    ":disableRateLimiting",
+    ":ignoreModulesAndTests",
+    ":ignoreUnstable",
+    ":pinDevDependencies",
+    ":prImmediately",
+    ":renovatePrefix",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":separateMajorReleases",
+    ":skipStatusChecks",
+    ":updateNotScheduled",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor",
+    "schedule:weekly"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "patch": {
+        "groupName": "Patched dependencies",
+        "groupSlug": "all-patch"
+      }
+    }
+  ]
+}
