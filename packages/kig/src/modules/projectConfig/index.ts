@@ -1,8 +1,5 @@
 import { cosmiconfigSync } from 'cosmiconfig'
-import * as fs from 'fs'
-import * as path from 'path'
 import { ProjectConfig } from '~/types'
-import { workingDir } from '~/utils/paths'
 import { projectConfigSchema } from './schemas'
 
 let _config: ProjectConfig | null = null

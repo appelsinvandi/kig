@@ -1,10 +1,11 @@
 import { prompt } from 'enquirer'
-import { camelCase } from 'change-case'
 
+// @ts-ignore
 const argv = require('yargs-parser')(process.argv.slice(2))
 
 export async function Generator_Init() {
   try {
+    // @ts-ignore
     const args = (await prompt({
       name: 'generatorName',
       type: 'input',

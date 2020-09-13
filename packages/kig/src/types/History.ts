@@ -1,5 +1,10 @@
 import { HistoryEntryType } from '~/constants'
 
+export interface HistoryEntryDiscovery {
+  entryName: string
+  entryPath: string
+}
+
 export interface HistoryEntry {
   timestamp: number
   command: string

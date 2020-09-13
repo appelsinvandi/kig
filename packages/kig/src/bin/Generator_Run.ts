@@ -4,6 +4,7 @@ import { discoverGenerators } from '~/utils/discover'
 import { getGeneratorJobs } from '~/modules/jobsGenerator'
 import { createHistoryEntry } from '~/modules/history'
 import { executeJobQueue } from '~/modules/executeJobQueue'
+import { GeneratorArgs } from '~/types'
 
 const argv = require('yargs-parser')(process.argv.slice(2))
 
@@ -21,6 +22,13 @@ export async function Generator_Run() {
   })()
   delete argv._
 
+  // Hook
+  if (generatorConfig.hooks?.onStart != null) generatorConfig.hooks?.onStart()
+
+  // Hook
+  if (generatorConfig.hooks?.beforeArgsParser != null) await generatorConfig.hooks.beforeArgsParser(argv)
+
+  let args: GeneratorArgs = {}
   if (Array.isArray(generatorConfig.args)) {
     for (const argConfig of generatorConfig.args) {
       if (
@@ -33,26 +41,35 @@ export async function Generator_Run() {
             ...(typeof argConfig.promptOptions === 'function'
               ? argConfig.promptOptions(argv)
               : argConfig.promptOptions),
-          })
-          argv[argConfig.name] = answer[argConfig.name]
+          }) // TODO: Handle error
+          args[argConfig.name] = answer[argConfig.name]
         }
-        // TODO throw
+        // TODO: Error
+      } else {
+        args[argConfig.name] = argv[argConfig.name]
       }
     }
   }
+
+  // Hook
+  if (generatorConfig.hooks?.afterArgsParser != null) args = (await generatorConfig.hooks.afterArgsParser(args)) ?? args
+
   const command =
     'kig' +
     ' ' +
     generatorConfig.name +
     ' ' +
-    Object.entries(argv ?? {})
+    Object.entries(args)
       .map(([k, v]) => (typeof v === 'string' && v.includes(' ') ? `--${k} "${v}"` : `--${k} ${v}`))
       .join(' ')
 
-  const jobs = await getGeneratorJobs(argv ?? {}, generatorDirPath, generatorConfig)
+  const jobs = await getGeneratorJobs(args, generatorDirPath, generatorConfig)
 
   createHistoryEntry(jobs, command)
   executeJobQueue(jobs)
+
+  // Hook
+  if (generatorConfig.hooks?.onEnd != null) await generatorConfig.hooks?.onEnd()
 }
 
 async function selectGenerator() {

@@ -12,13 +12,17 @@ export const generatorConfigSchema = joi.object({
     })
   ),
   hooks: joi.object({
+    onStart: joi.function(),
     beforeArgsParser: joi.function(),
     afterArgsParser: joi.function(),
-    beforeArgsHandler: joi.function(),
-    afterArgsHandler: joi.function(),
-    beforeTemplateConfigValidation: joi.function(),
-    afterTemplateConfigValidation: joi.function(),
-    beforeRender: joi.function(),
-    afterRender: joi.function(),
+    beforeDiscoverTemplates: joi.function(),
+    afterDiscoverTemplates: joi.function(),
+    beforeParseTemplateHead: joi.function(),
+    afterParseTemplateHead: joi.function(),
+    beforeParseTemplateBody: joi.function(),
+    afterParseTemplateBody: joi.function(),
+    beforeGenerateJobQueue: joi.function(),
+    afterGenerateJobQueue: joi.function(),
+    onEnd: joi.function(),
   }),
 })

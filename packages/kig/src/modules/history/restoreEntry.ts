@@ -1,17 +1,21 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import to from 'await-to-js'
 import { prompt } from 'enquirer'
-import { HistoryEntry } from '~/types'
+import { HistoryEntry, HistoryEntryDiscovery } from '~/types'
 import { workingDir } from '~/utils/paths'
 import { hashFileBody } from './utils/hash'
 import { HistoryEntryType } from '~/constants'
+import chalk from 'chalk'
 
-export async function restoreHistoryEntry(historyEntry: { entryName: string; entryPath: string }) {
-  const entryIndex = require(path.resolve(historyEntry.entryPath, 'index.json')) as HistoryEntry
+export async function restoreHistoryEntry(entryDiscovery: HistoryEntryDiscovery) {
+  const entryIndex = require(path.resolve(entryDiscovery.entryPath, 'index.json')) as HistoryEntry
   entryIndex.items = entryIndex.items.map((e) => ({
     ...e,
     destinationPath: path.resolve(workingDir, e.destinationPath),
   }))
+
+  console.log('Undoing the following action:', entryIndex.command)
 
   // Check for changes
   const changedFiles = entryIndex.items.filter(
@@ -20,18 +24,20 @@ export async function restoreHistoryEntry(historyEntry: { entryName: string; ent
   )
   if (changedFiles.length > 0) {
     const changedPaths = changedFiles.map((e) => e.destinationPath.replace(workingDir, '').replace(/^[\/\\]/, ''))
-    const answer = (await prompt({
-      name: 'override',
-      type: 'confirm',
-      message:
-        'There has been changes to the following files since the history entry was made:\n' +
-        `│   - ${changedPaths.join('\n│   - ')}\n` +
-        '└ Proceeding will override all these files and delete all changes. Do you want to continue?',
-    })) as { override: boolean }
+    const [overridePromptErr, overridePromptAnswer] = await to(
+      prompt({
+        name: 'override',
+        type: 'confirm',
+        message:
+          'There has been changes to the following files since the history entry was made:\n' +
+          `│   - ${changedPaths.map((p) => chalk.underline(p)).join('\n│   - ')}\n` +
+          '└ Proceeding will override all these files and delete all changes. Do you want to continue?',
+      }) as Promise<{ override: boolean }>
+    )
 
-    if (!answer.override) {
-      // TODO: Message
-      return
+    if (overridePromptErr != null || !overridePromptAnswer!.override) {
+      console.log('Exiting...')
+      process.exit(0)
     }
   }
 
@@ -39,9 +45,9 @@ export async function restoreHistoryEntry(historyEntry: { entryName: string; ent
     if (entryItem.type === HistoryEntryType.ADD && fs.existsSync(entryItem.destinationPath)) {
       fs.unlinkSync(entryItem.destinationPath)
     } else if (entryItem.type === HistoryEntryType.CHANGE) {
-      fs.copyFileSync(path.resolve(historyEntry.entryPath, entryItem.cacheFileName), entryItem.destinationPath)
+      fs.copyFileSync(path.resolve(entryDiscovery.entryPath, entryItem.cacheFileName), entryItem.destinationPath)
     }
   }
 
-  fs.rmdirSync(historyEntry.entryPath, { recursive: true })
+  fs.rmdirSync(entryDiscovery.entryPath, { recursive: true })
 }
