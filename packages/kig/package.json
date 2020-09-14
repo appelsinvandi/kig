@@ -13,8 +13,8 @@
   },
   "scripts": {
     "start": "ts-node --project tsconfig.dev.json -r tsconfig-paths/register ./src/bin/index.ts",
-    "build:cjs": "tsc -p ./tsconfig.json && tscpaths --project ./tsconfig.dev.json -s . -o ./lib",
-    "build:es": "tsc -p ./tsconfig.json -m esNext --outDir esm && tscpaths --project ./tsconfig.dev.json -s . -o ./esm",
+    "build:cjs": "tsc -p ./tsconfig.json && tscpaths --project ./tsconfig.dev.json -s ./src -o ./lib",
+    "build:es": "tsc -p ./tsconfig.json -m esNext --outDir esm && tscpaths --project ./tsconfig.dev.json -s ./src -o ./esm",
     "build": "yarn cleanup && yarn build:cjs && yarn build:es",
     "cleanup": "rimraf lib/**/* && rimraf esm/**/*",
     "prepublishOnly": "npm run build"
