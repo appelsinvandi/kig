@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Generator_Init } from './Generator_Init'
 import { Generator_Run } from './Generator_Run'
 import { History_Undo } from './History_Undo'
