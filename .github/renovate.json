@@ -28,5 +28,17 @@
         "groupSlug": "all-patch"
       }
     }
-  ]
+  ],
+  "pin": {
+    "labels": ["dependency", "dependency:pin"]
+  },
+  "patch": {
+    "labels": ["dependency", "dependency:patch"]
+  },
+  "minor": {
+    "labels": ["dependency", "dependency:minor"]
+  },
+  "major": {
+    "labels": ["dependency", "dependency:major"]
+  }
 }
