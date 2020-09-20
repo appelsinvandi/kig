@@ -17,9 +17,11 @@
     ":updateNotScheduled",
     "group:monorepos",
     "group:recommended",
-    "helpers:disableTypesNodeMajor",
-    "schedule:weekly"
+    "helpers:disableTypesNodeMajor"
   ],
+  "schedule": [
+    "before 3am on Saturday"
+  ]
   "packageRules": [
     {
       "packagePatterns": ["*"],
