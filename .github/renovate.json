@@ -21,7 +21,7 @@
   ],
   "schedule": [
     "before 3am on Saturday"
-  ]
+  ],
   "packageRules": [
     {
       "packagePatterns": ["*"],
