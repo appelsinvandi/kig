@@ -1,4 +1,4 @@
-import { GeneratorArgs, GeneratorConfig, Job } from '~/types'
+import { GeneratorArgs, GeneratorConfig, Job, TemplateHead } from '~/types'
 import { discoverTemplates } from './00-discoverTemplates'
 import { parseTemplate } from './01-parseTemplate'
 import { renderTemplateHead } from './02-renderTemplateHead'
@@ -26,23 +26,24 @@ export async function getGeneratorJobs(
       let renderedTemplateHead = renderTemplateHead(templateHead, args)
       let parsedTemplateHead = parseTemplateHead(renderedTemplateHead)
       // TODO: Show validation errors
-      // @ts-ignore
       let templateHeadValidationResult = validateTemplateHead(parsedTemplateHead)
+      let validatedTemplateHead = templateHeadValidationResult.value as TemplateHead
       if (generatorConfig.hooks?.afterParseTemplateHead != null)
-        parsedTemplateHead =
-          (await generatorConfig.hooks?.afterParseTemplateHead(parsedTemplateHead, args)) ?? parsedTemplateHead
+        validatedTemplateHead =
+          (await generatorConfig.hooks?.afterParseTemplateHead(validatedTemplateHead, args)) ?? validatedTemplateHead
 
       if (generatorConfig.hooks?.beforeParseTemplateBody != null)
         templateBody =
-          (await generatorConfig.hooks?.beforeParseTemplateBody(parsedTemplateHead, templateBody, args)) ?? templateBody
-      let renderedTemplateBody = renderTemplateBody(parsedTemplateHead, templateBody, args)
+          (await generatorConfig.hooks?.beforeParseTemplateBody(validatedTemplateHead, templateBody, args)) ??
+          templateBody
+      let renderedTemplateBody = renderTemplateBody(validatedTemplateHead, templateBody, args)
       if (generatorConfig.hooks?.afterParseTemplateBody != null)
         renderedTemplateBody =
-          (await generatorConfig.hooks?.afterParseTemplateBody(parsedTemplateHead, renderedTemplateBody, args)) ??
+          (await generatorConfig.hooks?.afterParseTemplateBody(validatedTemplateHead, renderedTemplateBody, args)) ??
           renderedTemplateBody
 
       return {
-        templateHead: parsedTemplateHead,
+        templateHead: validatedTemplateHead,
         templateBody: renderedTemplateBody,
       }
     })
