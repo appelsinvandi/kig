@@ -1,0 +1,4 @@
+feature: feature/*
+bug: fix/*
+chore: chore/*
+dependency: renovate/*
