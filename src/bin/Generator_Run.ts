@@ -39,7 +39,7 @@ export async function Generator_Run() {
           const answer = await prompt({
             name: argConfig.name,
             ...(typeof argConfig.promptOptions === 'function'
-              ? argConfig.promptOptions(argv)
+              ? argConfig.promptOptions(args)
               : argConfig.promptOptions),
           }) // TODO: Handle error
           args[argConfig.name] = answer[argConfig.name]
