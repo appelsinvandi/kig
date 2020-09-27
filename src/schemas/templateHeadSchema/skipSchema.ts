@@ -27,6 +27,10 @@ export function getSkipSchema(modes: TemplateSkipMode[]) {
   if (modes.includes(TemplateSkipMode.REGEX)) {
     schema = schema.when(joi.object({ mode: TemplateSkipMode.REGEX }).unknown(), {
       then: joi.object({
+        skipOn: joi.string().valid('match', 'noMatch').default('match').messages({
+          'string.base': 'Must be one of the following string values: match, noMatch',
+          'any.only': 'Must be one of the following string values: match, noMatch',
+        }),
         pattern: joi.string().required().messages({
           'string.base': 'Must be a regex pattern',
           'any.required': 'This property is required',
@@ -44,7 +48,11 @@ export function getSkipSchema(modes: TemplateSkipMode[]) {
   if (modes.includes(TemplateSkipMode.SEARCH)) {
     schema = schema.when(joi.object({ mode: TemplateSkipMode.SEARCH }).unknown(), {
       then: joi.object({
-        text: joi.string().required().messages({
+        skipOn: joi.string().valid('match', 'noMatch').default('match').messages({
+          'string.base': 'Must be one of the following string values: match, noMatch',
+          'any.only': 'Must be one of the following string values: match, noMatch',
+        }),
+        search: joi.string().required().messages({
           'string.base': 'Must a string',
           'any.required': 'This property is required',
         }),
