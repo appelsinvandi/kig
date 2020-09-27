@@ -7,6 +7,8 @@ export function validateTemplateHead(templateHead: TemplateHead) {
   if (validationResult.error != null) {
     throw new ValidateTemplateHeadError(ValidateTemplateHeadErrorCode.INVALID_TEMPLATE_HEAD_SCHEMA)
   }
+
+  return validationResult
 }
 
 export enum ValidateTemplateHeadErrorCode {
