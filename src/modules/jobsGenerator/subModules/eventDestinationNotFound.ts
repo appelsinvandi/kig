@@ -7,7 +7,7 @@ export async function getEventDestinationNotFoundResolutionType(
   destinationPath: string
 ) {
   if (templateHead.on?.destinationNotFound?.action === 'create') {
-    return JobType.OVERRIDE
+    return JobType.CREATE
   } else if (templateHead.on?.destinationNotFound?.action === 'skip') {
     return JobType.SKIP
   } else if (templateHead.on?.destinationNotFound?.action === 'exit') {
