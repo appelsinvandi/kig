@@ -25,11 +25,12 @@ categories:
       - 'dependency'
 
 version-resolver:
-  major:
-    labels:
-      - 'breaking'
+  # major:
+  #   labels:
+  #     - Put breaking here when the project is ready for stable release
   minor:
     labels:
+      - 'breaking'
       - 'enhancement'
   patch:
     labels:
