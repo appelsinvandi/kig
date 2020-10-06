@@ -7,15 +7,24 @@ import { generatorConfigSchema } from '../schemas/generatorConfigSchema'
 let _generators: [generatorDirPath: string, generatorConfig: GeneratorConfig][] | null = null
 export async function discoverGenerators() {
   if (_generators == null) {
-    _generators = fs
-      .readdirSync(paths.templateDir)
-      .map((e) => path.resolve(paths.templateDir, e))
-      .filter((p) => fs.existsSync(path.resolve(p, 'config.js')))
-      .map((p) => [p, require(path.resolve(p, 'config.js')) as GeneratorConfig])
-      .filter(([, gConfig]) => !generatorConfigSchema.validate(gConfig).error) as [
-      generatorDirPath: string,
-      generatorConfig: GeneratorConfig
-    ][]
+    const GeneratorDirs = fs.readdirSync(paths.templateDir)
+    _generators = []
+    for (const generatorDir of GeneratorDirs) {
+      const generatorDirPath = path.resolve(paths.templateDir, generatorDir)
+      const generatorConfigPath = path.resolve(generatorDirPath, 'config.js')
+
+      if (!fs.existsSync(generatorConfigPath)) continue
+      const generatorConfig = require(generatorConfigPath) as GeneratorConfig
+
+      const generatorValidationResult = generatorConfigSchema.validate(generatorConfig)
+      if (generatorValidationResult.error != null) {
+        console.error('There was an error with a generator:')
+        console.error(JSON.stringify(generatorValidationResult.error, null, 2))
+        continue
+      }
+
+      _generators.push([generatorDirPath, generatorValidationResult.value])
+    }
   }
 
   return _generators
