@@ -1,4 +1,4 @@
-import { GeneratorArgConfigEntry } from './GeneratorArg'
+import { GeneratorArgConfigEntry, GeneratorArgConfigEntryFunction } from './GeneratorArg'
 import { GeneratorHooks } from './GeneratorHooks'
 
 export interface GeneratorConfig {
@@ -13,7 +13,7 @@ export interface GeneratorConfig {
   /**
    * List of generator arguments required of the user.
    */
-  args?: GeneratorArgConfigEntry[]
+  args?: (GeneratorArgConfigEntry | GeneratorArgConfigEntryFunction)[]
   /**
    * Used for hooking into the generator lifecycle.
    */
