@@ -1,3 +1,4 @@
+import { paramCase } from 'change-case'
 import { prompt } from 'enquirer'
 import { GeneratorArgConfigEntry, GeneratorArgs, GeneratorArgValue, GeneratorConfig } from '~/types'
 
@@ -5,10 +6,10 @@ export async function parseGeneratorArgs(generatorConfig: GeneratorConfig, argv:
   let args = {}
   if (Array.isArray(generatorConfig.args)) {
     for (let argConfig of generatorConfig.args) {
-      const arg = argv[argConfig.name]
       if (typeof argConfig === 'function') argConfig = await argConfig(args)
+      const arg = argv[paramCase(argConfig.name)]
 
-      args[argConfig.name] = parseGeneratorArg(argConfig, arg, args)
+      args[argConfig.name] = await parseGeneratorArg(argConfig, arg, args)
     }
   }
 
@@ -16,7 +17,13 @@ export async function parseGeneratorArgs(generatorConfig: GeneratorConfig, argv:
 }
 
 async function parseGeneratorArg(argConfig: GeneratorArgConfigEntry, arg: GeneratorArgValue, args: GeneratorArgs) {
-  if (arg == null || (typeof argConfig.validate === 'function' && argConfig.validate(arg, args))) {
+  const validationResult = typeof argConfig.validate === 'function' ? await argConfig.validate(arg, args) : true
+
+  if (
+    arg == null ||
+    (typeof validationResult === 'boolean' && !validationResult) ||
+    (typeof validationResult === 'object' && !validationResult.isValid)
+  ) {
     if (argConfig.prompt != null) {
       try {
         let answer: GeneratorArgValue
@@ -46,7 +53,7 @@ async function parseGeneratorArg(argConfig: GeneratorArgConfigEntry, arg: Genera
                 type: 'autocomplete',
                 name: argConfig.name,
                 message: argConfig.prompt.message,
-                choices: argConfig.prompt.choices,
+                choices: [...argConfig.prompt.choices],
               }
               break
 
@@ -56,12 +63,15 @@ async function parseGeneratorArg(argConfig: GeneratorArgConfigEntry, arg: Genera
                 name: argConfig.name,
                 muliple: true,
                 message: argConfig.prompt.message,
-                choices: argConfig.prompt.choices,
+                choices: [...argConfig.prompt.choices],
               }
               break
           }
 
-          const promptResult = await prompt(promptOptions)
+          const promptResult = await prompt({
+            ...promptOptions,
+            initial: argConfig.default ?? undefined,
+          })
           answer = promptResult[argConfig.name]
         }
 

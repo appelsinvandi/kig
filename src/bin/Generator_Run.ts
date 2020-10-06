@@ -4,22 +4,28 @@ import { discoverGenerators } from '~/utils/discover'
 import { getGeneratorJobs } from '~/modules/jobsGenerator'
 import { createHistoryEntry } from '~/modules/history'
 import { executeJobQueue } from '~/modules/executeJobQueue'
-import { parseGeneratorArgs } from '~/modules/generatorArgsParser/generatorArgsParser'
+import {
+  parseGeneratorArgs,
+  ParseGeneratorArgsMissingArgError,
+  ParseGeneratorArgsPromptFailedError,
+} from '~/modules/generatorArgsParser'
 import { GeneratorArgs, GeneratorConfig } from '~/types'
 
 const argv = require('yargs-parser')(process.argv.slice(2))
 
 export async function Generator_Run() {
   // Chose template
-  const templateNameArg = argv._[0]
-  if (templateNameArg != null) {
-    const paramGenerator = await findGenerator(templateNameArg)
+  const [generatorDirPath, generatorConfig] = await (async () => {
+    const templateNameArg = argv._[0]
+    if (templateNameArg != null) {
+      const paramGenerator = await findGenerator(templateNameArg)
 
-    if (paramGenerator != null) return paramGenerator
-    else console.error('Error: Supplied generator was not found, please select one from the list.')
-  }
-  const selectedGeneratorName = await selectGenerator()
-  const [generatorDirPath, generatorConfig] = (await findGenerator(selectedGeneratorName))!
+      if (paramGenerator != null) return paramGenerator
+      else console.error('Error: Supplied generator was not found, please select one from the list.')
+    }
+    const selectedGeneratorName = await selectGenerator()
+    return (await findGenerator(selectedGeneratorName))!
+  })()
   delete argv._
 
   // Start
@@ -31,7 +37,11 @@ export async function Generator_Run() {
   try {
     args = await parseGeneratorArgs(generatorConfig, argv)
   } catch (e) {
-    console.log(e)
+    if (e instanceof ParseGeneratorArgsMissingArgError || e instanceof ParseGeneratorArgsPromptFailedError) {
+      console.log(e.message)
+    } else {
+      console.error(e)
+    }
     process.exit(0)
   }
   const command = getFullCommand(generatorConfig, args)
@@ -52,6 +62,7 @@ export async function Generator_Run() {
 }
 
 async function selectGenerator() {
+  // TODO: Handle exit error
   const answer = (await prompt({
     type: 'autocomplete',
     name: 'generators',
