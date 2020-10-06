@@ -14,17 +14,3 @@ jobs:
         uses: release-drafter/release-drafter@v5.11.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Parse release version'
-        id: 'release_version_parse'
-        uses: frabert/replace-string-action@v1.2
-        with:
-          pattern: 'v(\d+\.\d+\.\d+)'
-          string: ${{ github.release_drafter.tag_name }}
-          replace-with: '$1'
-      - name: Checkout
-        uses: actions/checkout@v2.3.3
-      - name: 'Sync package.json version'
-        id: 'release_version_sync'
-        uses: reedyuk/npm-version@1.0.1
-        with:
-          version: ${{ github.release_version_parse.replaced }}
