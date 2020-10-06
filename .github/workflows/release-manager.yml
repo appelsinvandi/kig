@@ -21,6 +21,8 @@ jobs:
           pattern: 'v'
           string: ${{ github.release_drafter.tag_name }}
           replace-with: ''
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
       - name: 'Sync package.json version'
         id: 'release_version_sync'
         uses: reedyuk/npm-version@1.0.1
