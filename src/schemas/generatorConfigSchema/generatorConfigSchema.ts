@@ -1,13 +1,16 @@
 import joi from 'joi'
+import { getGeneratorConfigPromptOptionsSchema } from './generatorConfigPromptOptionsSchema'
 
 export const generatorConfigSchema = joi.object({
   name: joi.string().required(),
   description: joi.string(),
   args: joi.array().items(
+    joi.function(),
     joi.object({
       name: joi.string().required(),
       description: joi.string(),
-      promptOptions: joi.alternatives().try(joi.function(), joi.object()),
+      default: joi.alternatives().try(joi.string(), joi.boolean()),
+      prompt: joi.alternatives().try(getGeneratorConfigPromptOptionsSchema(), joi.function()),
       validate: joi.function(),
     })
   ),
