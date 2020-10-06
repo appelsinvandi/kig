@@ -18,9 +18,9 @@ jobs:
         id: 'release_version_parse'
         uses: frabert/replace-string-action@v1.2
         with:
-          pattern: 'v'
+          pattern: 'v(\d+\.\d+\.\d+)'
           string: ${{ github.release_drafter.tag_name }}
-          replace-with: ''
+          replace-with: '$1'
       - name: Checkout
         uses: actions/checkout@v2.3.3
       - name: 'Sync package.json version'
