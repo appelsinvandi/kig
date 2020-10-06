@@ -1,9 +1,12 @@
 name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
+change-template: '* #$NUMBER $TITLE'
 template: |
-  ## What's Changed
-
   $CHANGES
+
+  ## Contributors
+
+  $CONTRIBUTORS
 categories:
   - title: '💥 Breaking'
     labels:
@@ -23,11 +26,13 @@ categories:
   - title: '📦 Dependency Updates'
     labels:
       - 'dependency'
-
+exclude-labels:
+  - 'skip-changelog'
 version-resolver:
+  # Uncomment when ready for release, and remove 'breaking' from minor
   # major:
   #   labels:
-  #     - Put breaking here when the project is ready for stable release
+  #     - 'breaking'
   minor:
     labels:
       - 'breaking'

@@ -1,0 +1,28 @@
+name: Release Manger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Draft release'
+        id: 'release_drafter'
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 'Parse release version'
+        id: 'release_version_parse'
+        uses: frabert/replace-string-action@v1
+        with:
+          pattern: 'v'
+          string: ${{ github.release_drafter.tag_name }}
+          replace-with: ''
+      - name: 'Sync package.json version'
+        id: 'release_version_sync'
+        uses: reedyuk/npm-version@v1
+        with:
+          version: ${{ github.release_version_parse.replaced }}
