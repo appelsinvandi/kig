@@ -7,6 +7,8 @@ export async function parseGeneratorArgs(generatorConfig: GeneratorConfig, argv:
   if (Array.isArray(generatorConfig.args)) {
     for (let argConfig of generatorConfig.args) {
       if (typeof argConfig === 'function') argConfig = await argConfig(args)
+      if (argConfig == null) continue
+
       const arg = argv[paramCase(argConfig.name)]
 
       args[argConfig.name] = await parseGeneratorArg(argConfig, arg, args)
