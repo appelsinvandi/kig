@@ -14,7 +14,7 @@ export function discoverTemplates(generatorLocation: string) {
 
       if (fs.lstatSync(contentPath).isDirectory()) {
         templateFiles = templateFiles.concat(scan(contentPath))
-      } else if (contentName.endsWith('.t.ejs')) {
+      } else if (contentName.endsWith('.t.ejs') || contentName.endsWith('.kig')) {
         templateFiles = templateFiles.concat(contentPath)
       }
     }
