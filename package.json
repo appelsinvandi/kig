@@ -37,7 +37,7 @@
   "devDependencies": {
     "@types/ejs": "3.0.5",
     "@types/js-yaml": "3.12.5",
-    "@types/node": "12.12.70",
+    "@types/node": "12.19.1",
     "husky": "4.3.0",
     "prettier": "2.1.2",
     "pretty-quick": "3.1.0",
