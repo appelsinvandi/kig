@@ -29,6 +29,7 @@ categories:
       - 'dependency'
 exclude-labels:
   - 'skip-changelog'
+  - 'dependency:dev'
 version-resolver:
   # Uncomment when ready for release, and remove 'breaking' from minor
   # major:
