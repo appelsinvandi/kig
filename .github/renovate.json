@@ -29,6 +29,10 @@
         "groupName": "Patched dependencies",
         "groupSlug": "all-patch"
       }
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "labels": ["dependency:dev"]
     }
   ],
   "pin": {
