@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "@types/ejs": "3.0.5",
-    "@types/js-yaml": "3.12.5",
-    "@types/node": "12.19.11",
-    "husky": "4.3.6",
+    "@types/js-yaml": "3.12.6",
+    "@types/node": "12.19.12",
+    "husky": "4.3.7",
     "prettier": "2.2.1",
     "pretty-quick": "3.1.0",
     "rimraf": "3.0.2",
