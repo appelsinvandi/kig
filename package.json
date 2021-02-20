@@ -35,7 +35,7 @@
     "js-yaml": "^3.14.0"
   },
   "devDependencies": {
-    "@types/ejs": "3.0.5",
+    "@types/ejs": "3.0.6",
     "@types/js-yaml": "3.12.6",
     "@types/node": "12.19.16",
     "husky": "4.3.8",
