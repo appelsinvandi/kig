@@ -24,7 +24,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "arrify": "^2.0.1",
+    "arrify": "^3.0.0",
     "await-to-js": "^2.1.1",
     "chalk": "^4.1.0",
     "change-case": "^4.1.1",
