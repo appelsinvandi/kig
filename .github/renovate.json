@@ -2,49 +2,22 @@
   "timezone": "Europe/Copenhagen",
   "extends": [
     ":automergeBranch",
-    ":automergePatch",
-    ":dependencyDashboard",
-    ":disablePeerDependencies",
+    ":automergeMinor",
+    ":disableDependencyDashboard",
     ":disableRateLimiting",
     ":ignoreModulesAndTests",
     ":ignoreUnstable",
-    ":pinDevDependencies",
     ":prImmediately",
     ":renovatePrefix",
-    ":semanticPrefixFixDepsChoreOthers",
+    ":semanticCommits",
+    ":semanticPrefixChore",
     ":separateMajorReleases",
     ":skipStatusChecks",
     ":updateNotScheduled",
+    "group:allNonMajor",
     "group:monorepos",
     "group:recommended",
-    "helpers:disableTypesNodeMajor"
-  ],
-  "schedule": [
-    "before 3am on Saturday"
-  ],
-  "packageRules": [
-    {
-      "packagePatterns": ["*"],
-      "patch": {
-        "groupName": "Patched dependencies",
-        "groupSlug": "all-patch"
-      }
-    },
-    {
-      "depTypeList": ["devDependencies"],
-      "labels": ["dependency:dev"]
-    }
-  ],
-  "pin": {
-    "labels": ["dependency", "dependency:pin"]
-  },
-  "patch": {
-    "labels": ["dependency", "dependency:patch"]
-  },
-  "minor": {
-    "labels": ["dependency", "dependency:minor"]
-  },
-  "major": {
-    "labels": ["dependency", "dependency:major"]
-  }
+    "helpers:disableTypesNodeMajor",
+    "workarounds:all"
+  ]
 }
