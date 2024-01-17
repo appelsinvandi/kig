@@ -1368,10 +1368,10 @@ prettier@2.8.8:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
-pretty-quick@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/pretty-quick/-/pretty-quick-3.3.0.tgz#a90a872b0f339acdb085984349612c3042ff7938"
-  integrity sha512-jjGAXpGvKTQj4Wses5yfEz4pBJHWX604iL4RVGwIgZyh0XOdoFW3difW0iv8zuWU0MUEuP3dI60FKoXK35J9TQ==
+pretty-quick@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/pretty-quick/-/pretty-quick-3.3.1.tgz#cfde97fec77a8d201a0e0c9c71d9990e12587ee2"
+  integrity sha512-3b36UXfYQ+IXXqex6mCca89jC8u0mYLqFAN5eTQKoXO6oCQYcIVYZEB/5AlBHI7JPYygReM2Vv6Vom/Gln7fBg==
   dependencies:
     execa "^4.1.0"
     find-up "^4.1.0"
