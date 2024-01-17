@@ -88,7 +88,7 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/minimatch@*", "@types/minimatch@^3.0.3":
+"@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
@@ -159,22 +159,12 @@ arr-union@^3.1.0:
   resolved "https://registry.yarnpkg.com/arr-union/-/arr-union-3.1.0.tgz#e39b09aea9def866a8f206e288af63919bae39c4"
   integrity sha1-45sJrqne+Gao8gbiiK9jkZuuOcQ=
 
-array-differ@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/array-differ/-/array-differ-3.0.0.tgz#3cbb3d0f316810eafcc47624734237d6aee4ae6b"
-  integrity sha512-THtfYS6KtME/yIAhKjZ2ul7XI96lQGHRputJQHO80LAWQnuGP4iCIN8vdMRboGbIEYBwU33q8Tch1os2+X0kMg==
-
 array-union@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
   integrity sha1-mjRBDk9OPaI96jdb5b5w8kd47Dk=
   dependencies:
     array-uniq "^1.0.1"
-
-array-union@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"
-  integrity sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
 
 array-uniq@^1.0.1:
   version "1.0.3"
@@ -324,7 +314,7 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.2:
+chalk@^4.0.2, chalk@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -1149,17 +1139,6 @@ ms@2.0.0:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
   integrity sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
 
-multimatch@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/multimatch/-/multimatch-5.0.0.tgz#932b800963cea7a31a033328fa1e0c3a1874dbe6"
-  integrity sha512-ypMKuglUrZUD99Tk2bUQ+xNQj43lPEfAeX2o9cTteAmShXy2VHDJpuwu1o0xqoKCt9jLVAvwyFKdLTPXKAfJyA==
-  dependencies:
-    "@types/minimatch" "^3.0.3"
-    array-differ "^3.0.0"
-    array-union "^2.1.0"
-    arrify "^2.0.1"
-    minimatch "^3.0.4"
-
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -1345,6 +1324,16 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
+picocolors@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
+  integrity sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==
+
+picomatch@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-3.0.1.tgz#817033161def55ec9638567a2f3bbc876b3e7516"
+  integrity sha512-I3EurrIQMlRc9IaAZnqRR044Phh2DXY+55o7uJ0V+hYZAcQYSuFWsc9q5PvyDHUSCe1Qxn/iBz+78s86zWnGag==
+
 pify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
@@ -1379,17 +1368,17 @@ prettier@2.8.8:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
-pretty-quick@3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/pretty-quick/-/pretty-quick-3.2.1.tgz#d707f7ccb588219311e9a187ec02d9d33ccdcbd6"
-  integrity sha512-eeoyODyxk6SGTWDwIddoCKaCbgzI/BF17PuRC+ejXWDja5TS6iiXF1emmPY1nXKVwDVPsQ6WudYmD/mlj1EZng==
+pretty-quick@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/pretty-quick/-/pretty-quick-3.3.0.tgz#a90a872b0f339acdb085984349612c3042ff7938"
+  integrity sha512-jjGAXpGvKTQj4Wses5yfEz4pBJHWX604iL4RVGwIgZyh0XOdoFW3difW0iv8zuWU0MUEuP3dI60FKoXK35J9TQ==
   dependencies:
-    chalk "^4.1.2"
     execa "^4.1.0"
     find-up "^4.1.0"
     ignore "^5.3.0"
     mri "^1.2.0"
-    multimatch "^5.0.0"
+    picocolors "^1.0.0"
+    picomatch "^3.0.1"
     tslib "^2.6.2"
 
 pump@^3.0.0:
