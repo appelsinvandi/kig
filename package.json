@@ -38,7 +38,7 @@
     "@types/ejs": "3.1.5",
     "@types/js-yaml": "3.12.10",
     "@types/node": "12.20.55",
-    "husky": "4.3.8",
+    "husky": "8.0.3",
     "prettier": "2.8.8",
     "pretty-quick": "3.3.0",
     "rimraf": "3.0.2",
