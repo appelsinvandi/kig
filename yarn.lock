@@ -961,9 +961,9 @@ jake@^10.8.5:
     minimatch "^3.1.2"
 
 joi@^17.2.1:
-  version "17.13.2"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-17.13.2.tgz#21adee350465211cbc5e92281cdc0d058b1974c1"
-  integrity sha512-QJQKY10YowIi6yUpDQG9YpeWLD+OHYlY/La8gk7VitrXfy34quHwCu4QKNlBV1rpgQj0YpnWWl4JM+3DU6GapQ==
+  version "17.13.3"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.13.3.tgz#0f5cc1169c999b30d344366d384b12d92558bcec"
+  integrity sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==
   dependencies:
     "@hapi/hoek" "^9.3.0"
     "@hapi/topo" "^5.1.0"
